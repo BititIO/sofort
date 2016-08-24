@@ -53,12 +53,16 @@ module Sofort
       success_url = opts[:success_url] ||  Sofort.success_url
       abort_url = opts[:abort_url] ||  Sofort.abort_url
       email_customer = opts[:email_customer] ||  Sofort.email_customer
+      language_code = opts[:language_code] || Sofort.language_code
       notification_email = opts[:notification_email] ||  Sofort.notification_email
       notification_url = opts[:notification_url] ||  Sofort.notification_url
+      user_variable = opts[:user_variable] ||  Sofort.user_variable
+      project_id = opts[:project_id] ||  Sofort.project_id
 
       {
         amount: amount,
         currency_code: currency_code,
+        language_code: language_code,
         reasons: {
           reason: reason
         },
@@ -67,6 +71,9 @@ module Sofort
           country_code: country_code
         },
         email_customer: email_customer,
+        user_variables: {
+          user_variable: user_variable
+        },
         notification_emails: {
           notification_email: notification_email
         },
@@ -76,7 +83,7 @@ module Sofort
         success_url: success_url,
         abort_url: abort_url,
         su: '',
-        project_id: Sofort.project_id
+        project_id: project_id
       }.to_xml(root: 'multipay', skip_types: true, dasherize: false)
 
     end
